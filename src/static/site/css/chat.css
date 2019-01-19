@@ -1,0 +1,122 @@
+html,body{
+	font-family: 'Open Sans', sans-serif;
+}
+.chat{
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+}
+.chat__members-panel{
+	flex-basis: 25%;
+	background: #333648;
+	height: 100vh;
+	overflow-y: scroll;
+}
+.chat__messages-panel{
+	flex-basis: 75%;
+	background: #f3f5f8;
+	height: 100vh;
+	overflow-y: scroll;
+	display: flex;
+	flex-direction: column;
+	background: url("https://www.toptal.com/designers/subtlepatterns/patterns/topography.png");
+}
+.chat__member{
+	padding: 32px;
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+}
+.chat__member:focus{
+	outline: none;
+}
+.chat__member__avatar{
+	width: 50px;
+	height: 50px;
+	border-radius: 100%;
+	margin-right: 16px;
+}
+.chat__member__name{
+	font-size: 18px;
+	font-weight: bold;
+	color: rgba(255, 255, 255, 0.75);
+}
+.chat__member__meta{
+	font-size: 14px;
+	font-weight: normal;
+	color: rgba(255, 255, 255, 0.35);
+}
+.chat__messages-panel{
+	position: relative;
+}
+.chat__message{
+	width: 100%;
+}
+.chat__member--active{
+	background-color: rgba(255,255,255, 0.075);
+}
+.chat__member--active .chat__member__name{
+	color: rgba(255, 255, 255, 1);
+}
+.chat__member--active .chat__member__meta{
+	color: rgba(255, 255, 255, 0.45);
+}
+.chat__message__container{
+	position: absolute;
+	bottom: 0;
+	margin-bottom: 0px;
+	width: 100%;
+}
+.chat__message{
+	font-size: 16px;
+	padding: 16px;
+	color: #333648;
+	font-weight: normal;
+	background: #e3e8ef;
+	outline: none;
+	border: none;
+	box-shadow: none;
+}
+.chat__message:focus{
+	outline: none;
+	border: none;
+	box-shadow: none;
+}
+.chat__container{
+	height: 100vh;
+	overflow-y: scroll;
+	padding-bottom: 50px;
+}
+.chat__bubble{
+	background-color: #e3e8ef;
+	margin: 16px;
+	max-width: 500px;
+	padding: 16px;
+}
+.chat__bubble__name{
+	font-weight: bold;
+	font-size: 16px;
+	margin-bottom: 8px;
+	color: #333648;
+}
+.chat__bubble__message{
+	font-weight: normal;
+	font-size: 16px;
+	line-height: 1.65;
+	color: #333648;
+}
+.chat__bubble--received{
+	border-radius: 16px 16px 16px 0px;
+}
+.chat__bubble--sent{
+	border-radius: 16px 16px 0px 16px;
+	background-color: rgba(51, 54, 72, 1);
+	margin-left: auto;
+	color: #fff;
+}
+.chat__bubble--sent .chat__bubble__name{
+	color: #fff;
+}
+.chat__bubble--sent .chat__bubble__message{
+	color: rgba(255, 255, 255, 0.65);
+}
