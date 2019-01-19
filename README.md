@@ -19,3 +19,11 @@ IncubateIND needs to build a Campus Ambassador Program for our representatives i
 	1. Stats
 	2. Hackathon page generator
 
+
+## Quick Start
+1. `python3 -m venv kratos`
+2. `source kratos/bin/activate`
+3. `pip install -r requirements.txt`
+4. `cd src && ./kratos/settings/local.sample.env`
+5. `python manage.py migrate`
+6. `python manage.py migrate`
