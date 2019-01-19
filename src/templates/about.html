@@ -62,12 +62,12 @@
         <div id="address" class="col-md-4">
           <h2>Our Location</h2>
           <address>
-            <strong>Edge Solutions Ltd.</strong><br>
-            Taj Mahal<br>
-            Agra<br>
-            Uttar Pradesh<br>
-            India - 282001<br>
-            <abbr>P:</abbr> +91 0562 222 6431
+            <strong>Kratos</strong><br>
+            Sequoia Capital, 6th Floor,<br>
+            East Wing, Block B,<br>
+            Divyasree Technopolis, Off HAL Airport Road,<br>
+            Bengaluru, Karnataka 560037<br>
+            <abbr>P:</abbr> +91 8050248326
           </address>
         </div>
         <div id="map-container" class="col-md-8"></div>
@@ -78,27 +78,16 @@
 {% endblock container %}
 
 {% block scripts %}
-  <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+  <script src="https://apis.mapmyindia.com/advancedmaps/v1/o7avedxidf83tkzq33oxp5f2nvjjtazh/map_load?v=01."></script>
   <script>
 
-   function init_map() {
-     // Enter the latitude and longitude of your office here
-	 var myLocation = new google.maps.LatLng(27.176141, 78.042370);
+   // Enter the latitude and longitude of our office here
+   var map = new MapmyIndia.Map("map-container", {
+      center:[12.948473, 77.690892],
+      zoomControl: true,
+      hybrid:true
+   });
+   L.marker([12.948473, 77.690892]).addTo(map);
 
-     var mapOptions = {
-          center: myLocation,
-          zoom: 14
-     };
-
-	 var marker = new google.maps.Marker({
-	   position: myLocation,
-	   title:"We are here"});
-
-     var map = new google.maps.Map(document.getElementById("map-container"),
-                                   mapOptions);
-	 marker.setMap(map);
-   }
-
-   google.maps.event.addDomListener(window, 'load', init_map);
   </script>
 {% endblock scripts %}
