@@ -17,6 +17,7 @@ class BaseProfile(models.Model):
                                 blank=True)
     bio = models.CharField("Short Bio", max_length=200, blank=True, null=True)
     email_verified = models.BooleanField("Email verified", default=False)
+    firebase_chat_id = models.TextField("Firebase chat id", default=None, null=True)
 
     class Meta:
         abstract = True
