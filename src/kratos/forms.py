@@ -8,4 +8,4 @@ class AmbassadorInfoForm(forms.ModelForm):
 
     class Meta:
         model = AmbassadorInfo
-        exclude = ('created_date', 'status')
+        exclude = ('user', 'created_date', 'status')
