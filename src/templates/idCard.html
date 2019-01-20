@@ -1,0 +1,85 @@
+<html lang="en" >
+<head>
+  <title>qrCode scanner and generator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
+  <style>
+  	html,body{
+		font-family: 'Open Sans', sans-serif;
+		box-sizing: border-box;
+		padding: 0px;
+		margin: 0px;
+	}
+	.id-Container{
+		width: 100%;
+		height: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background-color: #f3f5f8;
+	}
+	.id__Card{
+		height: 600px;
+		width: 400px;
+		background-color: #fff;
+		border-radius: 5px;
+		display: flex;
+		flex-direction: column;
+	}
+	.card__header{
+		background-color: #3742fa;
+		border-top-left-radius: 5px;border-top-right-radius: 5px;
+		padding-bottom: 32px; 
+	}
+	.card__body{
+		padding: 32px 16px;
+	}
+	.card__avatar{
+		border-radius: 100%;
+		display: block;
+		margin: 12px auto;
+		width: 100px;
+		height: 100px;
+	}
+	.card__member{
+		color: #333648;
+		font-size: 22px;
+		font-weight: bold;
+		text-align: center;
+	}
+	.card__member--team{
+		font-size: 14px;
+		color: #333648;
+		text-align: center;
+		margin-top: 12px;
+	}
+	.card__footer{
+		border-top: 1px solid #eee;
+		margin-top: auto;
+		padding: 16px 32px;
+	}
+  </style>
+</head>
+<body>
+  <div class="id-Container">
+  	<div class="id__Card">
+  		<div class="card__header">
+  			<div style="background-color: #1e2af9;color: #fff;padding: 16px;border-top-left-radius: 5px;border-top-right-radius: 5px;margin-bottom: 16px;">
+  				<div style="font-weight: bold;font-size: 18px;text-align: center;font-size: .875rem;
+	    line-height: 2.25rem;text-transform: uppercase;">Innovators</div>
+  			</div>
+  			<img src="https://www.incubateind.com/mshack/assets/img/middle-bg.svg" style="display: block;margin: 0 auto;width: 200px;">
+  		</div>
+  		<div class="card__body">
+  			<img src="https://media.licdn.com/dms/image/C5103AQEYUePZ1z_grw/profile-displayphoto-shrink_800_800/0?e=1553731200&v=beta&t=XosVIuLsuWdpnsDo9Sb4qzxzXGXgY8uAO9_A1WgH7xQ" class="card__avatar">
+  			<div class="card__member">Umang Shukla</div>
+  			<div class="card__member--team">#1 Athena</div>
+  		</div>
+  		<div class="card__footer">
+  			<div style="color: #3742fa;font-size: 12px;font-weight: normal;text-align: center;margin-bottom: 5px;">Powered By</div>
+  			<img src="https://www.incubateind.com/mshack/assets/img/MS-Azure_logo_horiz_c-gray_rgb.png" style="display: block;margin: 0px auto;width: 150px;">
+  		</div>
+  	</div>
+  </div>
+</body>
+</html>
