@@ -1,0 +1,176 @@
+<html lang="en" >
+<head>
+  <title>qrCode scanner and generator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
+  <style>
+  	html,body{
+		font-family: 'Open Sans', sans-serif;
+		box-sizing: border-box;
+		padding: 0px;
+		margin: 0px;
+	}
+	.scanner-container{
+		width: 100%;
+		height: 100vh;
+		display: flex;
+		flex-direction: column;
+		align-content: center;
+		justify-content: center;
+	}
+	.scanner__btn-group{
+		display: flex;
+		justify-content: center;
+	}
+	.scanner__btn{
+		font-size: .875rem;
+	    line-height: 2.25rem;
+	    font-weight: 500;
+	    letter-spacing: .08929em;
+	    text-decoration: none;
+	    text-transform: uppercase;
+	    min-width: 64px;
+	    height: 36px;
+	    border: none;
+	    outline: none;
+	    line-height: inherit;
+	    display: flex;
+	    align-items: center;
+	    justify-content: center;
+	    border-radius: 4px;
+	    padding: 8px 16px;
+	    cursor: pointer;
+	}
+	.scanner__btn--scan{
+		background-color: #6200ee;
+		color: #ffffff;
+		box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+		margin-right: 12px;
+	}
+	.scanner__btn--generate{
+		background-color: #eee;
+		color: #222;
+	}
+	.scanner-backdrop, .qrCode-backdrop{
+		position: absolute;
+		width: 100vw;
+		height: 100vh;
+		top: 0;
+		background-color: rgba(0, 0, 0, 0.5);
+		display: flex;
+		flex-direction: column;
+		align-content: center;
+		justify-content: center;
+	}
+	.scanner__modal{
+		width: 500px;
+		height: 300px;
+		background-color: #fff;
+		box-shadow: 0px 11px 15px -7px rgba(0, 0, 0, 0.2), 0px 24px 38px 3px rgba(0, 0, 0, 0.14), 0px 9px 46px 8px rgba(0, 0, 0, 0.12);
+	    color: rgba(0, 0, 0, 0.87);
+	    border-radius: 4px;
+	    box-sizing: border-box;
+	}
+	.qrCode__modal{
+		width: 300px;
+		height: 300px;
+		background-color: #fff;
+		box-shadow: 0px 11px 15px -7px rgba(0, 0, 0, 0.2), 0px 24px 38px 3px rgba(0, 0, 0, 0.14), 0px 9px 46px 8px rgba(0, 0, 0, 0.12);
+	    color: rgba(0, 0, 0, 0.87);
+	    border-radius: 4px;
+	    box-sizing: border-box;
+	}
+	.hide{
+		display: none;
+	}
+	#ScannerPreview{
+		height: 100%;
+	}
+  </style>
+</head>
+<body>
+  <div class="scanner-container">
+  	<div class="scanner__btn-group">
+  		<button class="scanner__btn scanner__btn--scan">Scan Code</button>
+  		<button class="scanner__btn scanner__btn--generate">Generate Code</button>
+  	</div>
+  </div>
+  <div class="scanner-backdrop hide" id="scanner">
+  	<div style="display: flex; justify-content: center;">
+  		<div class="scanner__modal">
+  			<video id="ScannerPreview"></video>
+  		</div>
+  	</div>
+  </div>
+  <div class="qrCode-backdrop hide" id="qrCode">
+  	<div style="display: flex; justify-content: center;">
+  		<div class="qrCode__modal">
+  			<img src="https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=Hello%20world&choe=UTF-8" style="width: 100%;height: 100%;" id="qrCodeImage">
+  		</div>
+  	</div>
+  </div>
+  <script src="{% static 'site/js/instascan.min.js' %}"></script>
+  <script>
+  	const scannerContainer = document.getElementById('scanner');
+  	const qrCodeContainer = document.getElementById('qrCode');
+  	const qrCodeImage = document.getElementById('qrCodeImage');
+	const qrScan = document.querySelector('.scanner__btn--scan');
+	const qrGenerate = document.querySelector('.scanner__btn--generate');
+	const ScannerPreview = document.getElementById('ScannerPreview');
+
+	qrScan.addEventListener('click', function() {
+	    scannerContainer.classList.remove('hide');
+	    initScanner();
+	});
+
+	qrGenerate.addEventListener('click', function() {
+	    qrCodeContainer.classList.remove('hide');
+	    let qrCodeData = {
+	    	id: '00bc68d8-3040-5442-eaeb-7a8a4822d3f3',
+	    	startTime: new Date('January 19, 2019 09:00:00'),
+	    	endTime: new Date('January 20, 2019 15:00:00')
+	    }
+	    let qrCodeUrl = `https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=${JSON.stringify(qrCodeData)}&choe=UTF-8`;
+	    qrCodeImage.src = qrCodeUrl;
+	});
+
+
+	scannerContainer.addEventListener('click', function() {
+	    scannerContainer.classList.add('hide');
+	    scanner.stop();
+	});
+	qrCodeContainer.addEventListener('click', function() {
+	    qrCodeContainer.classList.add('hide');
+	});
+
+
+	let scanner = new Instascan.Scanner({
+	    video: ScannerPreview
+	});
+
+
+	function initScanner() {
+	    Instascan.Camera.getCameras()
+	        .then(function(cameras) {
+	            if (cameras.length > 0) {
+	                scanner.start(cameras[0]);
+	            } else {
+	                alert("No cameras found.");
+	            }
+	        })
+	        .catch(function(e) {
+	            console.error(e);
+	            alert(
+	                "You need to give camera access in order to scan address QR code."
+	            );
+	        });
+	}
+
+	scanner.addListener('scan', function(content) {
+	    console.log(content);
+	    scannerContainer.classList.add('hide');
+	    scanner.stop();
+	});
+  </script>
+</body>
+</html>
