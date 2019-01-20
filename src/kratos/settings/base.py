@@ -77,6 +77,7 @@ INSTALLED_APPS = (
     'easy_thumbnails',
 
     'profiles',
+    'kratos',
     'accounts',
     'rest_framework',
 

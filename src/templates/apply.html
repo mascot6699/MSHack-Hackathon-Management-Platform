@@ -12,10 +12,28 @@
 <!-- Benefits of the Django application -->
 {% block container %}
 
+{% load crispy_forms_tags %}
+
 <div id="sec1">
   <div class="container">
+    <div class="row text-center">
+      <br>
+      <br>
+      <br>
+      <br>
+      <h2>New Application For Campus Ambassador</h2>
+      <br>
+      <br>
+    </div>
     <div class="row">
-      <div class="col-md-12 text-center">
+      <div class="col-md-4 col-sm-offset-4">
+          <form method="POST" class="post-form">
+            {% csrf_token %}
+              {{ form | crispy }}
+              <button type="submit" class="save btn btn-default">
+                Save
+              </button>
+          </form>
       </div>
     </div>
     <div class="row">
