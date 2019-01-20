@@ -1,6 +1,9 @@
 <html lang="en" >
 {% load staticfiles %}
 <head>
+    <div id="csrfmiddlewaretoken">
+        {% csrf_token %}
+    </div>
   <title>qrCode scanner and generator</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
@@ -112,6 +115,27 @@
   </div>
   <script src="{% static 'site/js/instascan.min.js' %}"></script>
   <script>
+        let _http = obj => {
+            return new Promise((resolve, reject) => {
+                let xhr = new XMLHttpRequest();
+                xhr.open(obj.method || "GET", obj.url);
+                if (obj.headers) {
+                    Object.keys(obj.headers).forEach(key => {
+                        xhr.setRequestHeader(key, obj.headers[key]);
+                    });
+                }
+                xhr.onload = () => {
+                    if (xhr.status >= 200 && xhr.status < 300) {
+                        resolve(JSON.parse(xhr.response));
+                    } else {
+                        reject(xhr.statusText);
+                    }
+                };
+                xhr.onerror = () => reject(xhr.statusText);
+                xhr.send(JSON.stringify(obj.body));
+            });
+        };
+
   	const scannerContainer = document.getElementById('scanner');
   	const qrCodeContainer = document.getElementById('qrCode');
   	const qrCodeImage = document.getElementById('qrCodeImage');
@@ -169,9 +193,23 @@
 
 	scanner.addListener('scan', function(content) {
 	    console.log(content);
+	    var $crf_token = $('[id="csrfmiddlewaretoken"]').attr('value');
+	    _http({
+             method: 'POST',
+             url: '/v1.0/core/scan/',
+             body: JSON.parse(content),
+             headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': $crf_token
+             }
+         })
 	    scannerContainer.classList.add('hide');
 	    scanner.stop();
 	});
+
+
+
+
   </script>
 </body>
 </html>
