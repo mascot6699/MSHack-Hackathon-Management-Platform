@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import AmbassadorInfo
+from .models import AmbassadorInfo, Task, Event
 
 
 class StatusListFilter(admin.SimpleListFilter):
@@ -41,4 +41,15 @@ class AmbassadorInfoAdmin(admin.ModelAdmin):
     list_display = ('name', 'contact_number', 'status',)
     list_filter = (StatusListFilter,)
 
+
+class TaskAdmin(admin.ModelAdmin):
+    list_display = ('task_id', 'task_type', 'name',)
+
+
+class EventAdmin(admin.ModelAdmin):
+    pass
+
+
 admin.site.register(AmbassadorInfo, AmbassadorInfoAdmin)
+admin.site.register(Task, TaskAdmin)
+admin.site.register(Event, EventAdmin)

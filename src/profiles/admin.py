@@ -1,7 +1,7 @@
 from __future__ import unicode_literals
 from django.contrib import admin
 from authtools.admin import NamedUserAdmin
-from .models import Profile
+from .models import Profile, EventConnection
 from django.contrib.auth import get_user_model
 from django.core.urlresolvers import reverse
 
@@ -27,5 +27,11 @@ class NewUserAdmin(NamedUserAdmin):
         return '<a href="{}">{}</a>'.format(url, '\xb6')
     permalink.allow_tags = True
 
+
+class EventConnectionAdmin(admin.ModelAdmin):
+    pass
+
+
 admin.site.unregister(User)
 admin.site.register(User, NewUserAdmin)
+admin.site.register(EventConnection, EventConnectionAdmin)
