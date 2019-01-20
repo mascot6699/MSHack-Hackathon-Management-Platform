@@ -26,4 +26,4 @@ IncubateIND needs to build a Campus Ambassador Program for our representatives i
 3. `pip install -r requirements.txt`
 4. `cd src && ./kratos/settings/local.sample.env`
 5. `python manage.py migrate`
-6. `python manage.py migrate`
+6. `sudo python manage.py runserver 0.0.0.0:80`
