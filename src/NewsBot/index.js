@@ -1,19 +1,16 @@
 module.exports = async function(context, req) {
     context.log('JavaScript HTTP trigger function processed a request.');
-    
+    const firebase = require('./firebase.js');
+    const database = firebase.database();
+    const https = require('https');
+
     if (req.query.source || (req.body && req.body.source)) {
-        const https = require('https');
-        const database = require('./fbDB.js');
-
-        console.log('database', database);
-
         function bulkPostUpdation(article) {
-            console.log(article);
             if(article && article.content){
                 database.ref(`chat/trending/messages`).push({
                     sender: "News Bot",
                     sender_id: "news-bot",
-                    message: article.content,
+                    message: article.content + ' : ' + article.url,
                     timestamp: new Date().toJSON()
                 });
             }
@@ -32,7 +29,6 @@ module.exports = async function(context, req) {
 
             // The whole response has been received. Print out the result.
             resp.on('end', () => {
-                console.log('Picking First Article');
                 let articles = JSON.parse(data).articles;
                 let articleIndex = Math.floor(Math.random() * articles.length); 
                 let selectedArticle = articles[articleIndex];
