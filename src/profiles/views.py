@@ -59,3 +59,19 @@ class EditProfile(LoginRequiredMixin, generic.TemplateView):
         profile.save()
         messages.success(request, "Profile details saved!")
         return redirect("profiles:show_self")
+
+
+class CardProfile(LoginRequiredMixin, generic.TemplateView):
+    template_name = "idCard.html"
+    http_method_names = ['get', 'post']
+
+    def get(self, request, *args, **kwargs):
+        return super(CardProfile, self).get(request, *args, **kwargs)
+
+
+class ScanProfile(LoginRequiredMixin, generic.TemplateView):
+    template_name = "qrCode.html"
+    http_method_names = ['get', 'post']
+
+    def get(self, request, *args, **kwargs):
+        return super(ScanProfile, self).get(request, *args, **kwargs)
